@@ -6,7 +6,7 @@
 /*   By: gachalif <gachalif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:52:49 by gachalif          #+#    #+#             */
-/*   Updated: 2024/06/10 17:58:37 by gachalif         ###   ########.fr       */
+/*   Updated: 2024/06/11 09:03:23 by gachalif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	main(void)
 {
-	Zombie *newZombie = new Zombie("Braini4K");
+	Zombie *zombie = newZombie("Braini4k");
 
-	newZombie->announce();
-	delete newZombie;
+	zombie->announce();
+	delete zombie;
+
+	randomChump("Le zombie randome");
 }
