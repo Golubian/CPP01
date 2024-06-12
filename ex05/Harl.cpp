@@ -6,7 +6,7 @@
 /*   By: gachalif <gachalif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:47:56 by gachalif          #+#    #+#             */
-/*   Updated: 2024/06/12 16:20:54 by gachalif         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:37:15 by gachalif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,49 @@ void	Harl::error()
 	std::cout <<  "This is unacceptable ! I want to speak to the manager now." << std::endl;
 }
 
+
 void	Harl::complain(std::string level)
 {
-	std::map<std::string, void (Harl::*)()> levels;
-	levels["DEBUG"] = &Harl::debug;
-    levels["INFO"] = &Harl::info;
-    levels["WARNING"] = &Harl::warning;
-    levels["ERROR"] = &Harl::error;
+	void (Harl::*levels[4])();
+	levels[0] = &Harl::debug;
+    levels[1] = &Harl::info;
+    levels[2] = &Harl::warning;
+    levels[3] = &Harl::error;
 
-	void (Harl::*func)();
-	if (levels[level])
+	std::string	keys[4];
+	keys[0] = "DEBUG";
+    keys[1] = "INFO";
+    keys[2] = "WARNING";
+    keys[3] = "ERROR";
+
+	void (Harl::*func)() = NULL;
+	for (int i = 0; i < 4; i++)
 	{
-		func = levels[level];
-		(this->*func)();
+		if (level == keys[i])
+			func = levels[i];
 	}
+
+	if (func)
+		(this->*func)();
 	else
 		std::cout <<  "Harl is a bit confused..." << std::endl;
 }
+
+// On a pas le droit a map...
+// void	Harl::complain(std::string level)
+// {
+// 	std::map<std::string, void (Harl::*)()> levels;
+// 	levels["DEBUG"] = &Harl::debug;
+//     levels["INFO"] = &Harl::info;
+//     levels["WARNING"] = &Harl::warning;
+//     levels["ERROR"] = &Harl::error;
+
+// 	void (Harl::*func)();
+// 	if (levels[level])
+// 	{
+// 		func = levels[level];
+// 		(this->*func)();
+// 	}
+// 	else
+// 		std::cout <<  "Harl is a bit confused..." << std::endl;
+// }
